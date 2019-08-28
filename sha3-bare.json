@@ -1,0 +1,8 @@
+{
+  "name" : "sha3-bare",
+  "workdir" : "sha3",
+  "base" : "bare",
+  "host-init" : "build.sh",
+  "bin" : "bare/sha3-rocc.riscv",
+  "spike" : "spike_local/bin/spike"
+}

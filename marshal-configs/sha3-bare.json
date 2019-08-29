@@ -5,5 +5,8 @@
   "host-init" : "build.sh",
   "bin" : "bare/sha3-rocc.riscv",
   "spike" : "spike-local/bin/spike",
-  "spike-args" : "--extension=sha3"
+  "spike-args" : "--extension=sha3",
+  "testing" : {
+    "refDir" : "test-reference/bare"
+  }
 }

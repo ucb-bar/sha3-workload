@@ -1,4 +1,4 @@
 #!/bin/bash
 pushd ../
-ln -sf sha3/*.json .
+ln -sf sha3/marshal-configs/*.json .
 popd

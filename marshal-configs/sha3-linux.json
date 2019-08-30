@@ -4,6 +4,7 @@
   "workdir" : "sha3",
   "host-init" : "build.sh",
   "files" : [ ["linux-benchmarks/", "/root/"] ],
+  "linux-src" : "riscv-linux",
   "spike" : "spike-local/bin/spike",
   "spike-args" : "--extension=sha3"
 }

@@ -28,6 +28,11 @@ the rocc accelerator. To use the custom hardware, you must boot in spike:
     ./marshal --initramfs build workloads/sha3-linux.json
     ./marshal --initramfs launch --spike workloads/sha3-linux.json
 
+The '--initramfs' option tells marshal to build the root filesystem into the
+binary as an initial ram filesystem (this is needed because spike does not
+include a disk model). The '--spike' option tells marshal to boot the image in
+spike (the custom spike we provided in this case).
+
 ### Interactive Linux
 sha3-linux.json
 
@@ -36,6 +41,20 @@ program. The basic workload boots into an interactive session. You can look at
 '/root/linux' in the target for binaries to execute. 'sha3-sw' acts as a
 baseline and computes the hash in software only. 'sha3-rocc' uses the rocc
 accelerator to compute the hash.
+
+### Automated Linux Test
+sha3-linux-test.json
+
+This workload inherits from sha3-linux.json and adds a 'command' field that
+tells marshal to run a command automatically when the workload runs. It also
+adds a 'testing' field that provides a reference output for Marshal to compare
+against when running './marshal test workloads/sha3-linux-test.json'. Note that
+in Marshal, the reference output needs to match some subset of the actual
+output (notice that 'test-reference/linux/sha3-linux-test/uartlog' only has the
+test output, while the actual program output is much longer.
+
+To use this workload, try running:
+    ./marshal --initramfs test --spike workloads/sha3-linux-test.json
 
 # Key Components of this Workload
 

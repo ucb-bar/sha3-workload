@@ -1,0 +1,9 @@
+{
+  "name" : "sha3-linux",
+  "base" : "br-base.json",
+  "workdir" : "sha3",
+  "host-init" : "build.sh",
+  "files" : [ ["linux-benchmarks/", "/root/"] ],
+  "spike" : "spike-local/bin/spike",
+  "spike-args" : "--extension=sha3"
+}

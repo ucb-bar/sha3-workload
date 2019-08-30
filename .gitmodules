@@ -1,3 +1,6 @@
 [submodule "riscv-isa-sim"]
 	path = riscv-isa-sim
 	url = git@github.com:riscv/riscv-isa-sim.git
+[submodule "riscv-linux"]
+	path = riscv-linux
+	url = git@github.com:firesim/riscv-linux.git

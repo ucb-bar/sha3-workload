@@ -3,7 +3,7 @@
   "workdir" : "sha3",
   "base" : "bare",
   "host-init" : "build.sh",
-  "bin" : "bare/sha3-rocc.riscv",
+  "bin" : "bare-benchmarks/sha3-rocc.riscv",
   "spike" : "spike-local/bin/spike",
   "spike-args" : "--extension=sha3",
   "testing" : {

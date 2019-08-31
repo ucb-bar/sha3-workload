@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ./install.sh
-if [ $? != 0]; then
+if [ $? != 0 ]; then
   echo "Failed to install sha3 suite"
 fi
 

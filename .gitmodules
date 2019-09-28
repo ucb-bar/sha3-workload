@@ -4,3 +4,7 @@
 [submodule "riscv-linux"]
 	path = riscv-linux
 	url = https://github.com/firesim/linux.git
+[submodule "jtr/JohnTheRipper"]
+	path = jtr/JohnTheRipper
+	url = https://github.com/ucb-bar/JohnTheRipper.git
+	branch = riscv

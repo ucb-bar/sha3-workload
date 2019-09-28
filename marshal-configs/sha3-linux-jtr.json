@@ -1,0 +1,7 @@
+{
+  "name" : "sha3-linux-jtr",
+  "base" : "sha3-linux.json",
+  "workdir" : "sha3",
+  "host-init" : "jtr/build.sh",
+  "overlay" : "jtr/overlay"
+}

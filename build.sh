@@ -22,11 +22,7 @@ popd
 
 # Build bare-metal tests
 echo "Building bare-metal tests"
-pushd bare-benchmarks
-make
-popd
+make -C benchmarks/bare
 
 echo "Building linux tests"
-pushd linux-benchmarks
-make
-popd
+make -C benchmarks/linux

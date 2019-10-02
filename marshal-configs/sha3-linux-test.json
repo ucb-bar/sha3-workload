@@ -2,7 +2,7 @@
   "name" : "sha3-linux-test",
   "base" : "sha3-linux.json",
   "workdir" : "sha3",
-  "command" : "cd /root/linux-benchmarks && ./sha3-rocc",
+  "command" : "/root/sha3-rocc",
   "testing" : {
     "refDir" : "test-reference/linux"
   }

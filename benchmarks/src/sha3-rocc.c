@@ -8,11 +8,12 @@
 #include <stdint.h>
 #include "rocc.h"
 #include "sha3.h"
+#include "encoding.h"
 
 int main() {
 
   do {
-    printf("start basic test 1.\n");
+    printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
 
     // Setup some test data
@@ -33,6 +34,7 @@ int main() {
     /* asm volatile ("custom2 x0, %[length], x0, 1" : : [length]"r"(ilen)); */
     ROCC_INSTRUCTION_S(2, ilen, 1);
     asm volatile ("fence");
+
     // Check result
     int i = 0;
     unsigned char result[SHA3_256_DIGEST_SIZE] =
@@ -47,7 +49,6 @@ int main() {
     }
   } while(0);
 
-  
-  printf("success!\n");
+  printf("Success! Completed in %lu cycles\n", rdcycle());
   return 0;
 }

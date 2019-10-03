@@ -1,5 +1,5 @@
 {
-  "name" : "sha3-bare",
+  "name" : "sha3-bare-rocc",
   "workdir" : "sha3",
   "base" : "bare",
   "host-init" : "build.sh",

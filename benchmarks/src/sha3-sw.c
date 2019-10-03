@@ -4,15 +4,15 @@
 // Compile with riscv-gcc sha3-rocc.c
 // Run with spike --extension=sha3 pk a.out
 
-#include <assert.h>
 #include <stdio.h>
 #include <stdint.h>
 #include "sha3.h"
+#include "encoding.h"
 
 int main() {
 
   do {
-    printf("start basic test 1.\n");
+    printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
 
     // Setup some test data
@@ -29,11 +29,14 @@ int main() {
     sha3ONE(input, ilen, result);
     for(i = 0; i < SHA3_256_DIGEST_SIZE; i++){
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
-     assert(output[i]==result[i]);
+      if(output[i] != result[i]) {
+        printf("Outputs don't match!\n");
+        return 1;
+      }
     }
 
   } while(0);
 
-  printf("success!\n");
+  printf("Success! Completed in %lu cycles\n", rdcycle());
   return 0;
 }

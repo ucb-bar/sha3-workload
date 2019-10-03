@@ -20,11 +20,18 @@ Linux and our custom software simulator, spike).
 # Workloads
 ## Bare-Metal
 bare/
-sha3-bare.json
+sha3-bare-rocc.json
 
 This workload runs bare-metal and directly accesses the rocc accelerator. To build the binary run:
 
-    ./marshal build workloads/sha3-bare.json
+    ./marshal build workloads/sha3-bare-rocc.json
+
+bare/
+sha3-bare-sw.json
+
+This workload runs bare-metal and runs a sw version of the sw computation. To build the binary run:
+
+    ./marshal build workloads/sha3-bare-sw.json
 
 ## Linux
 linux/

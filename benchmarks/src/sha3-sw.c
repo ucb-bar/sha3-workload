@@ -8,33 +8,32 @@
 #include <stdint.h>
 #include "sha3.h"
 #include "encoding.h"
+#include "compiler.h"
 
 int main() {
 
-  unsigned long start = 0;
-  unsigned long end = 0;
+  unsigned long start, end;
 
   do {
     printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
 
     // Setup some test data
-    unsigned int ilen = 150;
-    unsigned char input[150] = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
-    unsigned char output[SHA3_256_DIGEST_SIZE];
+    static unsigned char input[150] __aligned(8) = { '\0' };
+    unsigned char output[SHA3_256_DIGEST_SIZE] __aligned(8);
 
     start = rdcycle();
 
     // Compute hash in SW
-    sha3ONE(input, ilen, output);
+    sha3ONE(input, sizeof(input), output);
 
     end = rdcycle();
 
     // Check result
-    int i = 0;
-    unsigned char result[SHA3_256_DIGEST_SIZE] =
+    int i;
+    static const unsigned char result[SHA3_256_DIGEST_SIZE] =
     {221,204,157,217,67,211,86,31,54,168,44,245,97,194,193,26,234,42,135,166,66,134,39,174,184,61,3,149,137,42,57,238};
-    //sha3ONE(input, ilen, result);
+    //sha3ONE(input, sizeof(input), result);
     for(i = 0; i < SHA3_256_DIGEST_SIZE; i++){
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
       if(output[i] != result[i]) {

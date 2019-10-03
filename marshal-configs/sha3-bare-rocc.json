@@ -7,6 +7,6 @@
   "spike" : "spike-local/bin/spike",
   "spike-args" : "--extension=sha3",
   "testing" : {
-    "refDir" : "test-reference/bare"
+    "refDir" : "test-reference/bare-rocc"
   }
 }

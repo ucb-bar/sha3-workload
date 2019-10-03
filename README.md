@@ -2,8 +2,14 @@ This is an example set of workloads that uses the sha3 rocc accelerator.
 
 # Getting Started
 
+First install this repository into FireMarshal:
+
+    cd /PATH/TO/FIREMARSHAL/FireMarshal/workloads
+    git submodule add git@github.com:ucb-bar/sha3-workload.git sha3
+
 When you first clone this repository, you should first update all submodules, and then install the workloads to FireMarshal:
 
+    cd sha3
     git submodule update --init --recursive
     ./install.sh
 
@@ -16,7 +22,9 @@ Linux and our custom software simulator, spike).
 bare/
 sha3-bare.json
 
-This workload runs bare-metal and directly accesses the rocc accelerator.
+This workload runs bare-metal and directly accesses the rocc accelerator. To build the binary run:
+
+    ./marshal build workloads/sha3-bare.json
 
 ## Linux
 linux/

@@ -11,6 +11,8 @@
 
 int main() {
 
+  unsigned long total_cycles = 0;
+
   do {
     printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
@@ -20,23 +22,32 @@ int main() {
     unsigned char input[150] = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
     unsigned char output[SHA3_256_DIGEST_SIZE];
 
-    //compute hash
+    unsigned long start = rdcycle();
+
+    // Compute hash in SW
     sha3ONE(input, ilen, output);
+
+    unsigned long end = rdcycle();
+    total_cycles = total_cycles + end - start;
 
     // Check result
     int i = 0;
-    unsigned char result[SHA3_256_DIGEST_SIZE];
-    sha3ONE(input, ilen, result);
+    unsigned char result[SHA3_256_DIGEST_SIZE] =
+    {221,204,157,217,67,211,86,31,54,168,44,245,97,194,193,26,234,42,135,166,66,134,39,174,184,61,3,149,137,42,57,238};
+    //sha3ONE(input, ilen, result);
     for(i = 0; i < SHA3_256_DIGEST_SIZE; i++){
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
       if(output[i] != result[i]) {
-        printf("Outputs don't match!\n");
+        printf("Failed: Outputs don't match!\n");
+        printf("SHA execution took %lu cycles\n", total_cycles);
         return 1;
       }
     }
 
   } while(0);
 
-  printf("Success! Completed in %lu cycles\n", rdcycle());
+  printf("SHA execution took %lu cycles\n", total_cycles);
+
+  printf("Success!\n");
   return 0;
 }

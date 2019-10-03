@@ -12,6 +12,8 @@
 
 int main() {
 
+  unsigned long total_cycles = 0;
+
   do {
     printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
@@ -21,6 +23,9 @@ int main() {
     unsigned char input[150] = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
     unsigned char output[SHA3_256_DIGEST_SIZE];
 
+    unsigned long start = rdcycle();
+
+    // Compute hash with accelerator
     asm volatile ("fence");
     // Invoke the acclerator and check responses
 
@@ -35,6 +40,9 @@ int main() {
     ROCC_INSTRUCTION_S(2, ilen, 1);
     asm volatile ("fence");
 
+    unsigned long end = rdcycle();
+    total_cycles = total_cycles + end - start;
+
     // Check result
     int i = 0;
     unsigned char result[SHA3_256_DIGEST_SIZE] =
@@ -43,12 +51,15 @@ int main() {
     for(i = 0; i < SHA3_256_DIGEST_SIZE; i++){
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
       if(output[i] != result[i]) {
-        printf("Outputs don't match!\n");
+        printf("Failed: Outputs don't match!\n");
+        printf("SHA execution took %lu cycles\n", total_cycles);
         return 1;
       }
     }
   } while(0);
 
-  printf("Success! Completed in %lu cycles\n", rdcycle());
+  printf("SHA execution took %lu cycles\n", total_cycles);
+
+  printf("Success!\n");
   return 0;
 }

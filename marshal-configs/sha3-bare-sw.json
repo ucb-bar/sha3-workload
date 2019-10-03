@@ -1,12 +1,12 @@
 {
-  "name" : "sha3-bare",
+  "name" : "sha3-bare-sw",
   "workdir" : "sha3",
   "base" : "bare",
   "host-init" : "build.sh",
-  "bin" : "benchmarks/bare/sha3-rocc.riscv",
+  "bin" : "benchmarks/bare/sha3-sw.riscv",
   "spike" : "spike-local/bin/spike",
   "spike-args" : "--extension=sha3",
   "testing" : {
-    "refDir" : "test-reference/bare"
+    "refDir" : "test-reference/bare-sw"
   }
 }

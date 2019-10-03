@@ -8,11 +8,15 @@
 #include <stdint.h>
 #include "rocc.h"
 #include "sha3.h"
+#include "encoding.h"
 
 int main() {
 
+  unsigned long start = 0;
+  unsigned long end = 0;
+
   do {
-    printf("start basic test 1.\n");
+    printf("Start basic test 1.\n");
     // BASIC TEST 1 - 150 zero bytes
 
     // Setup some test data
@@ -20,6 +24,9 @@ int main() {
     unsigned char input[150] = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
     unsigned char output[SHA3_256_DIGEST_SIZE];
 
+    start = rdcycle();
+
+    // Compute hash with accelerator
     asm volatile ("fence");
     // Invoke the acclerator and check responses
 
@@ -33,6 +40,9 @@ int main() {
     /* asm volatile ("custom2 x0, %[length], x0, 1" : : [length]"r"(ilen)); */
     ROCC_INSTRUCTION_S(2, ilen, 1);
     asm volatile ("fence");
+
+    end = rdcycle();
+
     // Check result
     int i = 0;
     unsigned char result[SHA3_256_DIGEST_SIZE] =
@@ -41,13 +51,16 @@ int main() {
     for(i = 0; i < SHA3_256_DIGEST_SIZE; i++){
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
       if(output[i] != result[i]) {
-        printf("Outputs don't match!\n");
+        printf("Failed: Outputs don't match!\n");
+        printf("SHA execution took %lu cycles\n", end - start);
         return 1;
       }
     }
   } while(0);
 
-  
-  printf("success!\n");
+  printf("Success!\n");
+
+  printf("SHA execution took %lu cycles\n", end - start);
+
   return 0;
 }

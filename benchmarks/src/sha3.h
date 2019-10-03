@@ -4,6 +4,7 @@
 #define __SHA3_H
 
 #include <stdint.h>
+#include <inttypes.h>
 #include <stdio.h>
 #include <string.h>
 
@@ -90,7 +91,7 @@ void printState(uint64_t st[25])
   int i,j;
   for(i = 0; i<5; i++){
      for(j = 0; j<5; j++){
-       printf("%016llx ", st[i+j*5]);
+       printf("%016" PRIx64, st[i+j*5]);
      }
      printf("\n");
   }

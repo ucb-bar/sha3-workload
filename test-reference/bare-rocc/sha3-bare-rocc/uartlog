@@ -31,5 +31,4 @@ output[28]:137 ==? results[28]:137
 output[29]:42 ==? results[29]:42 
 output[30]:57 ==? results[30]:57 
 output[31]:238 ==? results[31]:238 
-SHA execution took 9 cycles
 Success!

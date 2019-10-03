@@ -46,8 +46,9 @@ int main() {
 
   } while(0);
 
+  printf("Success!\n");
+
   printf("SHA execution took %lu cycles\n", end - start);
 
-  printf("Success!\n");
   return 0;
 }

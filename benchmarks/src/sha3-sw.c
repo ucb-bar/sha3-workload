@@ -11,7 +11,8 @@
 
 int main() {
 
-  unsigned long total_cycles = 0;
+  unsigned long start = 0;
+  unsigned long end = 0;
 
   do {
     printf("Start basic test 1.\n");
@@ -22,13 +23,12 @@ int main() {
     unsigned char input[150] = "\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000\000";
     unsigned char output[SHA3_256_DIGEST_SIZE];
 
-    unsigned long start = rdcycle();
+    start = rdcycle();
 
     // Compute hash in SW
     sha3ONE(input, ilen, output);
 
-    unsigned long end = rdcycle();
-    total_cycles = total_cycles + end - start;
+    end = rdcycle();
 
     // Check result
     int i = 0;
@@ -39,14 +39,14 @@ int main() {
       printf("output[%d]:%d ==? results[%d]:%d \n",i,output[i],i,result[i]);
       if(output[i] != result[i]) {
         printf("Failed: Outputs don't match!\n");
-        printf("SHA execution took %lu cycles\n", total_cycles);
+        printf("SHA execution took %lu cycles\n", end - start);
         return 1;
       }
     }
 
   } while(0);
 
-  printf("SHA execution took %lu cycles\n", total_cycles);
+  printf("SHA execution took %lu cycles\n", end - start);
 
   printf("Success!\n");
   return 0;

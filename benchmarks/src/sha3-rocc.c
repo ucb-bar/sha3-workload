@@ -38,7 +38,7 @@ int main() {
     //              opcode rd rs1      rs2 funct
     /* asm volatile ("custom2 x0, %[length], x0, 1" : : [length]"r"(ilen)); */
     ROCC_INSTRUCTION_S(2, sizeof(input), 1);
-    asm volatile ("fence");
+    asm volatile ("fence" ::: "memory");
 
     end = rdcycle();
 

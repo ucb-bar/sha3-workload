@@ -129,3 +129,7 @@ cross-compiled by the 'build.sh' script (run by FireMarshal when building the
 workload). These benchmarks contain all of the code necessary to boot and run
 on a bare-metal system (e.g. the c runtime and a basic implementation of common
 system functions).
+
+## jtr
+
+Contains a fork of John the Ripper that targets the SHA3 accelerator.

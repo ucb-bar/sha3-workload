@@ -11,9 +11,21 @@
 #include "encoding.h"
 #include "compiler.h"
 
+#ifdef __linux
+#include <sys/mman.h>
+#endif
+
 int main() {
 
   unsigned long start, end;
+
+#ifdef __linux
+  // Ensure all pages are resident to avoid accelerator page faults
+  if (mlockall(MCL_CURRENT | MCL_FUTURE)) {
+    perror("mlockall");
+    return 1;
+  }
+#endif
 
   do {
     printf("Start basic test 1.\n");

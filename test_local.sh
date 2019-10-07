@@ -7,14 +7,19 @@ fi
 
 pushd ../../
 
-./marshal test -s workloads/sha3-bare.json
-if [ $? != 0 ]; then
-  echo "Bare-metal test failed"
-fi
+# ./marshal test -s workloads/sha3-bare-rocc.json
+# if [ $? != 0 ]; then
+#   echo "Bare-metal test failed"
+# fi
+#
+# ./marshal -d test -s workloads/sha3-linux-test.json
+# if [ $? != 0 ]; then
+#   echo "Linux unit test failed"
+# fi
 
-./marshal -i test -s workloads/sha3-linux-test.json
+./marshal -d test -s workloads/sha3-linux-jtr-test.json
 if [ $? != 0 ]; then
-  echo "Linux unit test failed"
+  echo "Linux John the Ripper test failed"
 fi
 
 popd

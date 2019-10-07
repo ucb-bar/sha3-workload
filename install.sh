@@ -2,8 +2,9 @@
 set -e
 
 pushd ../
-ln -sf sha3/marshal-configs/sha3-bare-rocc.json .
-ln -sf sha3/marshal-configs/sha3-bare-sw.json .
-ln -sf sha3/marshal-configs/sha3-linux.json .
-ln -sf sha3/marshal-configs/sha3-linux-test.json .
+for config in bare-rocc bare-sw linux linux-test \
+    linux-jtr linux-jtr-test linux-jtr-crack
+do
+    ln -sf "sha3/marshal-configs/sha3-${config}.json" .
+done
 popd

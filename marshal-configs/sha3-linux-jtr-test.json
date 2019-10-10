@@ -2,7 +2,7 @@
   "name" : "sha3-linux-jtr-test",
   "base" : "sha3-linux-jtr.json",
   "workdir" : "sha3",
-  "command" : "john --test --format=Raw-SHA3-256 && john --test --format=Raw-SHA3-256-rocc && echo 'SUCCESS!'",
+  "run" : "jtr/bench.sh",
   "testing" : {
     "refDir" : "test-reference/linux-jtr"
   }

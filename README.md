@@ -4,14 +4,13 @@ This is an example set of workloads that uses the SHA3 rocc accelerator.
 
 First install this repository into FireMarshal:
 
-    cd /PATH/TO/FIREMARSHAL/FireMarshal/workloads
+    cd /PATH/TO/FIREMARSHAL/FireMarshal/example-workloads
     git submodule add git@github.com:ucb-bar/sha3-workload.git sha3
 
-When you first clone this repository, you should first update all submodules, and then install the workloads to FireMarshal:
+When you first clone this repository, you should first update all submodules:
 
     cd sha3
     git submodule update --init --recursive
-    ./install.sh
 
 The first time you build a workload using FireMarshal, the `build.sh` script
 will be run automatically. This script compiles all of our dependencies (e.g.
@@ -30,18 +29,18 @@ accelerator to run a SHA3 computation. The `sha3-bare-sw` instead computes the S
 
 To build either binary run:
 
-    ./marshal build workloads/sha3-bare-rocc.json
-    ./marshal build workloads/sha3-bare-sw.json
+    ./marshal build example-workloads/sha3/marshal-configs/sha3-bare-rocc.json
+    ./marshal build example-workloads/sha3/marshal-configs/sha3-bare-sw.json
 
 To run the test interactively run:
 
-    ./marshal launch --spike workloads/sha3-bare-rocc.json
-    ./marshal launch --spike workloads/sha3-bare-sw.json
+    ./marshal launch --spike example-workloads/sha3/marshal-configs/sha3-bare-rocc.json
+    ./marshal launch --spike example-workloads/sha3/marshal-configs/sha3-bare-sw.json
 
 To run the unit test run:
 
-    ./marshal test --spike workloads/sha3-bare-rocc.json
-    ./marshal test --spike workloads/sha3-bare-sw.json
+    ./marshal test --spike example-workloads/sha3/marshal-configs/sha3-bare-rocc.json
+    ./marshal test --spike example-workloads/sha3/marshal-configs/sha3-bare-sw.json
 
 ## Linux
 
@@ -51,8 +50,8 @@ sha3-linux*.json
 The linux-based workloads can boot in qemu so long as you don't actually access
 the rocc accelerator. To use the custom hardware, you must boot in spike:
 
-    ./marshal --nodisk build workloads/sha3-linux.json
-    ./marshal --nodisk launch --spike workloads/sha3-linux.json
+    ./marshal --nodisk build example-workloads/sha3/marshal-configs/sha3-linux.json
+    ./marshal --nodisk launch --spike example-workloads/sha3/marshal-configs/sha3-linux.json
 
 The '--nodisk' option tells marshal to build the root filesystem into the
 binary as an initial ram filesystem (this is needed because spike does not
@@ -76,13 +75,13 @@ sha3-linux-test.json
 This workload inherits from sha3-linux.json and adds a 'command' field that
 tells marshal to run a command automatically when the workload runs. It also
 adds a 'testing' field that provides a reference output for Marshal to compare
-against when running './marshal test workloads/sha3-linux-test.json'. Note that
+against when running './marshal test example-workloads/sha3/marshal-configs/sha3-linux-test.json'. Note that
 in Marshal, the reference output needs to match some subset of the actual
 output (notice that 'test-reference/linux/sha3-linux-test/uartlog' only has the
 test output, while the actual program output is much longer.
 
 To use this workload, try running:
-    ./marshal --nodisk test --spike workloads/sha3-linux-test.json
+    ./marshal --nodisk test --spike example-workloads/sha3/marshal-configs/sha3-linux-test.json
 
 # Key Components of this Workload
 
@@ -109,7 +108,6 @@ copy instead of the system-provided spike.
 ## marshal-configs
 
 This directory contains our FireMarshal configurations for each workload.
-'install.sh' creates symlinks to these in the FireMarshal workloads directory.
 
 ## test-reference
 

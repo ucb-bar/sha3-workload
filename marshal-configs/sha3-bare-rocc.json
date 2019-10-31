@@ -1,6 +1,6 @@
 {
   "name" : "sha3-bare-rocc",
-  "workdir" : "sha3",
+  "workdir" : "..",
   "base" : "bare",
   "host-init" : "build.sh",
   "bin" : "benchmarks/bare/sha3-rocc.riscv",

@@ -1,7 +1,7 @@
 {
   "name" : "sha3-linux",
   "base" : "br-base.json",
-  "workdir" : "sha3",
+  "workdir" : "..",
   "host-init" : "build.sh",
   "files" : [
     ["benchmarks/linux/sha3-sw.riscv", "/root/sha3-sw"],

@@ -1,6 +1,6 @@
 {
   "name" : "sha3-bare-sw",
-  "workdir" : "sha3",
+  "workdir" : "..",
   "base" : "bare",
   "host-init" : "build.sh",
   "bin" : "benchmarks/bare/sha3-sw.riscv",

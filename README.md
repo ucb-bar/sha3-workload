@@ -1,4 +1,10 @@
-This is an example set of workloads that uses the SHA3 rocc accelerator.
+# DISCLAIMER
+
+**This repository has now been moved and merged into the https://github.com/ucb-bar/sha3 repository. Please follow the instructions there to build software for the SHA3 RoCC accelerator.**
+
+# SHA3 Workloads
+
+This is an example set of workloads that uses the SHA3 RoCC accelerator.
 
 # Getting Started
 
